@@ -13,7 +13,8 @@
                 "it": "Versione iniziale",
                 "es": "Versión inicial",
                 "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "zh-cn": "首次出版",
+                "uk": "початковий випуск"
             }
         },
         "title": "Meter Statistics",
@@ -27,7 +28,8 @@
             "it": "Statistiche del contatore",
             "es": "Estadísticas del medidor",
             "pl": "Statystyki miernika",
-            "zh-cn": "仪表统计"
+            "zh-cn": "仪表统计",
+            "uk": "Статистика вимірювача"
         },
         "desc": {
             "en": "Calculate statistics from any smart meter",
@@ -39,7 +41,8 @@
             "it": "Calcola le statistiche da qualsiasi contatore intelligente",
             "es": "Calcula estadísticas desde cualquier contador inteligente",
             "pl": "Oblicz statystyki z dowolnego inteligentnego licznika",
-            "zh-cn": "从任何智能电表计算统计数据"
+            "zh-cn": "从任何智能电表计算统计数据",
+            "uk": "Обчислюйте статистику з будь-якого розумного лічильника"
         },
         "authors": [
             "jb-tools <jb-tool@example.com>"
