@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/lib/accounting-helper.ts"],
+  "sourcesContent": ["export default class AccountingHelper {\n\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MAAO,iBAA+B;AAEtC;",
+  "names": []
+}

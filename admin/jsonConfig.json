@@ -1,0 +1,94 @@
+{
+    "i18n": true,
+    "type": "panel",
+    "items": {
+        "headerUnits": {
+            "type": "header",
+            "text": "Units",
+            "size": 2
+        },
+        "units": {
+            "type": "panel",
+            "label": "units",
+            "items": {
+                "meterUnit": {
+                    "type": "text",
+                    "label": "Unit of meter value"
+                },
+                "paymentUnit": {
+                    "type": "text",
+                    "label": "Unit of payment"
+                }
+            }   
+        },
+        "headerPayment": {
+            "type": "header",
+            "text": "Payment",
+            "size": 2
+        },
+        "payment": {
+            "type": "panel",
+            "label": "payment",
+            "items": {
+                "paymentValue": {
+                    "type": "number",
+                    "label": "Payment value",
+                    "newLine": true
+                },
+                "paymentCount": {
+                    "type": "number",
+                    "label": "Payment count",
+                    "min": 1,
+                    "newLine": true
+                },
+                "paymentCorrectionOffset": {
+                    "type": "number",
+                    "label": "Payment correction offset",
+                    "newLine": true
+                }
+            }   
+        },
+        "headerMeters": {
+            "type": "header",
+            "text": "Meters",
+            "size": 2
+        },
+        "meters": {
+            "type": "table",
+            "items": [
+                {
+                    "attr": "objectId",
+                    "width": "40%",
+                    "title": "Object ID",
+                    "type": "objectId",
+                    "validator": "!!data.objectId",
+                    "validatorNoSaveOnError": true
+                },
+                {
+                    "attr": "alias",
+                    "width": "30%",
+                    "title": "Meter alias",
+                    "type": "text"        ,
+                    "validator": "!!data.alias",
+                    "validatorNoSaveOnError": true
+                },
+                {
+                    "attr": "pricePerUnit",
+                    "width": "15%",
+                    "title": "Price per unit",
+                    "type": "number",
+                    "validator": "!!data.pricePerUnit",
+                    "validatorNoSaveOnError": true
+                },
+                {
+                    "attr": "basePrice",
+                    "width": "15%",
+                    "title": "Base price",
+                    "type": "number",
+                    "validator": "!!data.basePrice",
+                    "validatorNoSaveOnError": true
+                }
+            ]
+        }
+    }
+}
