@@ -3,10 +3,10 @@
   "version": "0.0.2",
   "description": "Calculate statistics from any smart meter",
   "author": {
-    "name": "jb-tools",
-    "email": "jb-tool@example.com"
+    "name": "jb-io",
+    "email": "96919536+jb-io@users.noreply.github.com"
   },
-  "homepage": "https://github.com/jb-tool/ioBroker.meter-statistics",
+  "homepage": "https://github.com/jb-io/ioBroker.meter-statistics",
   "license": "GPL-3.0",
   "keywords": [
     "smart",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:jb-tool/ioBroker.meter-statistics.git"
+    "url": "git@github.com:jb-io/ioBroker.meter-statistics.git"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.7"
@@ -73,7 +73,7 @@
     "release": "release-script"
   },
   "bugs": {
-    "url": "https://github.com/jb-tool/ioBroker.meter-statistics/issues"
+    "url": "https://github.com/jb-io/ioBroker.meter-statistics/issues"
   },
   "readmeFilename": "README.md"
 }

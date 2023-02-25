@@ -8,7 +8,7 @@
 
 [![NPM](https://nodei.co/npm/iobroker.meter-statistics.png?downloads=true)](https://nodei.co/npm/iobroker.meter-statistics/)
 
-**Tests:** ![Test and Release](https://github.com/jb-tool/ioBroker.meter-statistics/workflows/Test%20and%20Release/badge.svg)
+**Tests:** ![Test and Release](https://github.com/jb-io/ioBroker.meter-statistics/workflows/Test%20and%20Release/badge.svg)
 
 ## meter-statistics adapter for ioBroker
 
@@ -29,14 +29,14 @@ You are almost done, only a few steps left:
     ```
 1. Link your local repository with the one on GitHub:  
     ```bash
-    git remote add origin https://github.com/jb-tool/ioBroker.meter-statistics
+    git remote add origin https://github.com/jb-io/ioBroker.meter-statistics
     ```
 
 1. Push all files to the GitHub repo:  
     ```bash
     git push origin master
     ```
-1. Add a new secret under https://github.com/jb-tool/ioBroker.meter-statistics/settings/secrets. It must be named `AUTO_MERGE_TOKEN` and contain a personal access token with push access to the repository, e.g. yours. You can create a new token under https://github.com/settings/tokens.
+1. Add a new secret under https://github.com/jb-io/ioBroker.meter-statistics/settings/secrets. It must be named `AUTO_MERGE_TOKEN` and contain a personal access token with push access to the repository, e.g. yours. You can create a new token under https://github.com/settings/tokens.
 
 1. Head over to [src/main.ts](src/main.ts) and start programming!
 
@@ -108,7 +108,7 @@ Please refer to the [`dev-server` documentation](https://github.com/ioBroker/dev
     ### **WORK IN PROGRESS**
 -->
 ### 0.0.2 (2023-02-24)
-* (jb-tools) initial release
+* (jb-io) initial release
 
 ## License
                     GNU GENERAL PUBLIC LICENSE

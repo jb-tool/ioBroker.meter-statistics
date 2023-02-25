@@ -45,7 +45,7 @@
             "uk": "Обчислюйте статистику з будь-якого розумного лічильника"
         },
         "authors": [
-            "jb-tools <jb-tool@example.com>"
+            "jb-io <96919536+jb-io@users.noreply.github.com>"
         ],
         "keywords": [
             "smart",
@@ -58,8 +58,8 @@
         "main": "build/main.js",
         "icon": "meter-statistics.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/jb-tool/ioBroker.meter-statistics/master/admin/meter-statistics.png",
-        "readme": "https://github.com/jb-tool/ioBroker.meter-statistics/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/jb-io/ioBroker.meter-statistics/master/admin/meter-statistics.png",
+        "readme": "https://github.com/jb-io/ioBroker.meter-statistics/blob/master/README.md",
         "loglevel": "info",
         "mode": "schedule",
         "schedule": "0 0 * * *",
