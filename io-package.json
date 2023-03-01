@@ -17,7 +17,6 @@
                 "uk": "початковий випуск"
             }
         },
-        "title": "Meter Statistics",
         "titleLang": {
             "en": "Meter Statistics",
             "de": "Meter-Statistiken",
@@ -53,7 +52,7 @@
             "statistics",
             "calculate"
         ],
-        "license": "GPL-3.0",
+        "license": "GPL-3.0-or-later",
         "platform": "Javascript/Node.js",
         "main": "build/main.js",
         "icon": "meter-statistics.png",
