@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/lib/typedef.ts"],
+  "sourcesContent": ["export interface MeterState {\n    meter: MeterDefinition;\n    startValue: number;\n    currentValue: number;\n    consumption: number;\n}\n\nexport interface MeterDefinition {\n    objectId: string;\n    alias: string;\n    pricePerUnit: number;\n}\n\nexport interface MeterConsumption {\n    total: number;\n    average: number;\n}\n\nexport interface DayInfo {\n    firstDayOfYear: Date;\n    daysInYear: number;\n    daysSinceStartOfYear: number;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}
