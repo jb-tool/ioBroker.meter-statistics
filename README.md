@@ -114,7 +114,7 @@ Please refer to the [`dev-server` documentation](https://github.com/ioBroker/dev
 ### 0.0.1 (2023-03-01)
 * (jb-io) initial release
 
-## Licence
+## License
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Copyright (c) 2023 jb-io <96919536+jb-io@users.noreply.github.com>
