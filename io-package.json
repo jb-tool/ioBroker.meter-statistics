@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "meter-statistics",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "news": {
+      "0.0.3": {
+        "en": "Add predicted consumption",
+        "de": "Voraussichtlicher Verbrauch hinzufügen",
+        "ru": "Добавить прогнозируемое потребление",
+        "pt": "Adicionar consumo previsto",
+        "nl": "Advertentie voorspelde consumptie",
+        "fr": "Ajouter la consommation prévue",
+        "it": "Aggiungere il consumo previsto",
+        "es": "Add predicted consumption",
+        "pl": "Przewidywania konsumpcji",
+        "uk": "Додати передбачуване споживання",
+        "zh-cn": "增加预计消费"
+      },
       "0.0.2": {
         "en": "Change Logo",
         "de": "Logo ändern",
