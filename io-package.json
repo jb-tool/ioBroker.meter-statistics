@@ -1,94 +1,107 @@
 {
-    "common": {
-        "name": "meter-statistics",
-        "version": "0.0.1",
-        "news": {
-            "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版",
-                "uk": "початковий випуск"
-            }
-        },
-        "titleLang": {
-            "en": "Meter Statistics",
-            "de": "Meter-Statistiken",
-            "ru": "Статистика счетчика",
-            "pt": "Estatísticas do Medidor",
-            "nl": "Meterstatistieken",
-            "fr": "Statistiques du compteur",
-            "it": "Statistiche del contatore",
-            "es": "Estadísticas del medidor",
-            "pl": "Statystyki miernika",
-            "zh-cn": "仪表统计",
-            "uk": "Статистика вимірювача"
-        },
-        "desc": {
-            "en": "Calculate statistics from any smart meter",
-            "de": "Berechnen Sie Statistiken von jedem Smart Meter",
-            "ru": "Рассчитать статистику с любого умного счетчика",
-            "pt": "Calcule estatísticas de qualquer medidor inteligente",
-            "nl": "Bereken statistieken van elke slimme meter",
-            "fr": "Calculez les statistiques de n'importe quel compteur intelligent",
-            "it": "Calcola le statistiche da qualsiasi contatore intelligente",
-            "es": "Calcula estadísticas desde cualquier contador inteligente",
-            "pl": "Oblicz statystyki z dowolnego inteligentnego licznika",
-            "zh-cn": "从任何智能电表计算统计数据",
-            "uk": "Обчислюйте статистику з будь-якого розумного лічильника"
-        },
-        "authors": [
-            "jb-io <96919536+jb-io@users.noreply.github.com>"
-        ],
-        "keywords": [
-            "smart",
-            "meter",
-            "statistics",
-            "calculate"
-        ],
-        "license": "GPL-3.0-or-later",
-        "platform": "Javascript/Node.js",
-        "main": "build/main.js",
-        "icon": "meter-statistics.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/jb-io/ioBroker.meter-statistics/master/admin/meter-statistics.png",
-        "readme": "https://github.com/jb-io/ioBroker.meter-statistics/blob/master/README.md",
-        "loglevel": "info",
-        "mode": "schedule",
-        "schedule": "0 0 * * *",
-        "type": "logic",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "assumption",
-        "adminUI": {
-            "config": "json"
-        },
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.22"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=5.1.13"
-            }
-        ]
+  "common": {
+    "name": "meter-statistics",
+    "version": "0.0.2",
+    "news": {
+      "0.0.2": {
+        "en": "Change Logo",
+        "de": "Logo ändern",
+        "ru": "Изменить логотип",
+        "pt": "Alterar o logotipo",
+        "nl": "Verander Logo",
+        "fr": "Change Logo",
+        "it": "Cambia il logo",
+        "es": "Cambio de logo",
+        "pl": "Logo",
+        "uk": "Зміна логотипу",
+        "zh-cn": "变化"
+      },
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版",
+        "uk": "початковий випуск"
+      }
     },
-    "native": {
-        "meterUnit": "kWh",
-        "paymentUnit": "€",
-        "paymentValue": 0,
-        "paymentCount": 0,
-        "paymentCorrectionOffset": 0,
-        "paymentBasePrice": 0,
-        "meters": []
+    "titleLang": {
+      "en": "Meter Statistics",
+      "de": "Meter-Statistiken",
+      "ru": "Статистика счетчика",
+      "pt": "Estatísticas do Medidor",
+      "nl": "Meterstatistieken",
+      "fr": "Statistiques du compteur",
+      "it": "Statistiche del contatore",
+      "es": "Estadísticas del medidor",
+      "pl": "Statystyki miernika",
+      "zh-cn": "仪表统计",
+      "uk": "Статистика вимірювача"
     },
-    "objects": [],
-    "instanceObjects": []
+    "desc": {
+      "en": "Calculate statistics from any smart meter",
+      "de": "Berechnen Sie Statistiken von jedem Smart Meter",
+      "ru": "Рассчитать статистику с любого умного счетчика",
+      "pt": "Calcule estatísticas de qualquer medidor inteligente",
+      "nl": "Bereken statistieken van elke slimme meter",
+      "fr": "Calculez les statistiques de n'importe quel compteur intelligent",
+      "it": "Calcola le statistiche da qualsiasi contatore intelligente",
+      "es": "Calcula estadísticas desde cualquier contador inteligente",
+      "pl": "Oblicz statystyki z dowolnego inteligentnego licznika",
+      "zh-cn": "从任何智能电表计算统计数据",
+      "uk": "Обчислюйте статистику з будь-якого розумного лічильника"
+    },
+    "authors": [
+      "jb-io <96919536+jb-io@users.noreply.github.com>"
+    ],
+    "keywords": [
+      "smart",
+      "meter",
+      "statistics",
+      "calculate"
+    ],
+    "license": "GPL-3.0-or-later",
+    "platform": "Javascript/Node.js",
+    "main": "build/main.js",
+    "icon": "meter-statistics.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/jb-io/ioBroker.meter-statistics/master/admin/meter-statistics.png",
+    "readme": "https://github.com/jb-io/ioBroker.meter-statistics/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "schedule",
+    "schedule": "0 0 * * *",
+    "type": "logic",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "assumption",
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.22"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.1.13"
+      }
+    ]
+  },
+  "native": {
+    "meterUnit": "kWh",
+    "paymentUnit": "€",
+    "paymentValue": 0,
+    "paymentCount": 0,
+    "paymentCorrectionOffset": 0,
+    "paymentBasePrice": 0,
+    "meters": []
+  },
+  "objects": [],
+  "instanceObjects": []
 }
