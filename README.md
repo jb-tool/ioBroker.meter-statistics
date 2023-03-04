@@ -111,7 +111,7 @@ Please refer to the [`dev-server` documentation](https://github.com/ioBroker/dev
 -->
 
 ### **WORK IN PROGRESS**
-
+* Change Logo
 
 ### 0.0.1 (2023-03-01)
 * (jb-io) initial release
