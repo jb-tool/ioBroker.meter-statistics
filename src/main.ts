@@ -35,9 +35,10 @@ class MeterStatistics extends utils.Adapter {
         const dayInfo = this.getDayInfo();
         const meterStates = await this.getMeterStates();
 
-        const {total, average} = this.calculateMeterConsumption(meterStates, dayInfo);
+        const {total, average, predicted} = this.calculateMeterConsumption(meterStates, dayInfo);
         this.writeState('summary.consumptionTotal', this.roundConsumption(total));
         this.writeState('summary.consumptionAverage', this.roundConsumption(average));
+        this.writeState('summary.consumptionPredictedTotal', this.roundConsumption(predicted));
 
         const costs = this.calculateCosts(meterStates, dayInfo);
         this.writeState('summary.costs', this.roundCosts(costs));
@@ -66,12 +67,14 @@ class MeterStatistics extends utils.Adapter {
             const meter = meterState.meter;
             this.writeState(`meter.${meter.alias}.consumptionTotal`, this.roundConsumption(meterState.consumption));
             this.writeState(`meter.${meter.alias}.consumptionAverage`, this.roundConsumption(meterState.consumption / dayInfo.daysSinceStartOfYear));
+            this.writeState(`meter.${meter.alias}.consumptionPredictedTotal`, this.roundConsumption(meterState.consumption / dayInfo.daysSinceStartOfYear * dayInfo.daysInYear));
             totalConsumption += meterState.consumption;
         }
 
         return {
             total: totalConsumption,
             average: totalConsumption / dayInfo.daysSinceStartOfYear,
+            predicted: totalConsumption / dayInfo.daysSinceStartOfYear * dayInfo.daysInYear,
         };
     }
 
@@ -216,6 +219,18 @@ class MeterStatistics extends utils.Adapter {
                 },
                 native: {},
             });
+            await this.setObjectNotExistsAsync(`meter.${meter.alias}.consumptionPredicted`, {
+                type: 'state',
+                common: {
+                    name: 'Total predicted consumption in period',
+                    type: 'number',
+                    role: 'state',
+                    read: true,
+                    write: false,
+                    unit: this.config.meterUnit,
+                },
+                native: {},
+            });
             await this.setObjectNotExistsAsync(`meter.${meter.alias}.costs`, {
                 type: 'state',
                 common: {
@@ -235,6 +250,19 @@ class MeterStatistics extends utils.Adapter {
             type: 'state',
             common: {
                 name: 'Total consumption in period',
+                type: 'number',
+                role: 'state',
+                read: true,
+                write: false,
+                unit: this.config.meterUnit,
+            },
+            native: {},
+        });
+
+        await this.setObjectNotExistsAsync(`summary.consumptionPredictedTotal`, {
+            type: 'state',
+            common: {
+                name: 'Total predicted consumption in period',
                 type: 'number',
                 role: 'state',
                 read: true,

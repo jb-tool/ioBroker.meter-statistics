@@ -14,6 +14,7 @@ export interface MeterDefinition {
 export interface MeterConsumption {
     total: number;
     average: number;
+    predicted: number;
 }
 
 export interface DayInfo {
