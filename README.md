@@ -7,7 +7,6 @@
 ![Current version in stable repository](https://iobroker.live/badges/meter-statistics-stable.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-
 [![NPM](https://nodei.co/npm/iobroker.meter-statistics.png?downloads=true)](https://nodei.co/npm/iobroker.meter-statistics/)
 
 **Tests:** ![Test and Release](https://github.com/jb-io/ioBroker.meter-statistics/workflows/Test%20and%20Release/badge.svg)

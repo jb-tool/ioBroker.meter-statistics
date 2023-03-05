@@ -38,9 +38,9 @@
     "authorGithub": "jb-io",
     "authorEmail": "96919536+jb-io@users.noreply.github.com",
     "gitRemoteProtocol": "SSH",
-    "gitCommit": "no",
+    "gitCommit": "yes",
     "defaultBranch": "master",
     "license": "GNU GPLv3",
     "dependabot": "yes",
-    "creatorVersion": "2.2.0"
+    "creatorVersion": "2.3.0"
 }
