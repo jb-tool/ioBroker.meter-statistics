@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "meter-statistics",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "news": {
+      "0.0.4": {
+        "en": "[BUGFIX] Fix calculation of predicted total\n[TASK] Update project",
+        "de": "[BUGFIX] Berechnung der prognostizierten Summe festsetzen\n[TASK] Projekt aktualisieren",
+        "ru": "[BUGFIX] Исправление расчета прогнозируемого\n[TASK] Обновление проекта",
+        "pt": "[BUGFIX] Cálculo fixo do total previsto\n[TASK] Projeto de atualização",
+        "nl": "Fix berekening van voorspeld\nUpdate project",
+        "fr": "[BUGFIX] Calcul fixe du total prévu\n[TASK] Update project",
+        "it": "[BUGFIX] Calcolo fisso del totale previsto\n[TASK] Progetto di aggiornamento",
+        "es": "[BUGFIX] Fijar el cálculo del total previsto\n[TASK] Proyecto de actualización",
+        "pl": "(Oficjalny system obliczeń obliczeniowych obliczeń liczb rzeczywistych)\n(TASK) Update Project (ang.)",
+        "uk": "[BUGFIX] Фіксований розрахунок передбачуваного\n[TASK] Оновлення проекту",
+        "zh-cn": "[BUGFIX] 预测总额的固定计算\n[TASK]最新项目"
+      },
       "0.0.3": {
         "en": "Add predicted consumption",
         "de": "Voraussichtlicher Verbrauch hinzufügen",

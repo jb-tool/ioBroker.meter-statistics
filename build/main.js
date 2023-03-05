@@ -177,7 +177,7 @@ class MeterStatistics extends utils.Adapter {
         },
         native: {}
       });
-      await this.setObjectNotExistsAsync(`meter.${meter.alias}.consumptionPredicted`, {
+      await this.setObjectNotExistsAsync(`meter.${meter.alias}.consumptionPredictedTotal`, {
         type: "state",
         common: {
           name: "Total predicted consumption in period",
