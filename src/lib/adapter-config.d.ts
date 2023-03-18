@@ -1,17 +1,13 @@
 // This file extends the AdapterConfig type from "@types/iobroker"
 
-import { MeterDefinition } from './typedef';
+import {CalculatorConfig, MeterDefinition} from './typedef';
 
 // Augment the globally declared type ioBroker.AdapterConfig
 declare global {
     namespace ioBroker {
-        interface AdapterConfig {
+        interface AdapterConfig extends CalculatorConfig {
             meterUnit: string;
             paymentUnit: string;
-            paymentValue: number;
-            paymentCount: number;
-            paymentCorrectionOffset: number;
-            paymentBasePrice: number;
             meters: Array<MeterDefinition>;
         }
     }

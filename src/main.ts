@@ -5,7 +5,9 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 import * as utils from '@iobroker/adapter-core';
-import {DayInfo, MeterConsumption, MeterDefinition, MeterState} from './lib/typedef';
+import {MeterDefinition, MeterInfoCollection, MeterState} from './lib/typedef';
+import Calculator from './calculator';
+import Round from './round';
 
 // Load your modules here, e.g.:
 // import * as fs from "fs";
@@ -32,104 +34,43 @@ class MeterStatistics extends utils.Adapter {
 
         await this.assertObjectsExist();
 
-        const dayInfo = this.getDayInfo();
         const meterStates = await this.getMeterStates();
 
-        const {total, average, predicted} = this.calculateMeterConsumption(meterStates, dayInfo);
-        this.writeState('summary.consumptionTotal', this.roundConsumption(total));
-        this.writeState('summary.consumptionAverage', this.roundConsumption(average));
-        this.writeState('summary.consumptionPredictedTotal', this.roundConsumption(predicted));
+        const calculator = new Calculator(this.config);
 
-        const costs = this.calculateCosts(meterStates, dayInfo);
-        this.writeState('summary.costs', this.roundCosts(costs));
+        const meterInfos = calculator.calculateMeterInfos(meterStates);
 
-        const paid = this.calculatePaid(dayInfo);
-        this.writeState('summary.paid', this.roundCosts(paid));
-
-        const current = paid - costs;
-        this.writeState('summary.balance', this.roundCosts(current));
-
-        const recommendedPayment = this.calculateRecommendation(costs, dayInfo);
-        this.writeState('summary.recommendedPayment', this.roundCosts(recommendedPayment));
+        this.writeMeterInfos(meterInfos);
 
         this.end();
     }
 
-    private addPendingPromise(promise: Promise<any>): void {
+    private writeMeterInfos(meterInfos: MeterInfoCollection): void {
+        for (const meterName in meterInfos) {
+            const meterInfo = meterInfos[meterName];
+
+            this.writeState(`meters.${meterName}.balance`,                   Round.costs(meterInfo.balance));
+            this.writeState(`meters.${meterName}.consumptionAverage`,        Round.consumption(meterInfo.consumptionAverage));
+            this.writeState(`meters.${meterName}.consumptionPredictedTotal`, Round.consumption(meterInfo.consumptionPredictedTotal));
+            this.writeState(`meters.${meterName}.consumptionTotal`,          Round.consumption(meterInfo.consumptionTotal));
+            this.writeState(`meters.${meterName}.costs`,                     Round.costs(meterInfo.costs));
+            this.writeState(`meters.${meterName}.paid`,                      Round.costs(meterInfo.paid));
+            this.writeState(`meters.${meterName}.recommendedPayment`,        Round.costs(meterInfo.recommendedPayment));
+        }
+    }
+
+
+    private writeState(id: string, value: any): void {
+        const promise = this.setStateAsync(id, {val: value, ack: false});
         this.pendingPromises.push(promise);
     }
 
-    private calculateMeterConsumption(meterStates: MeterState[], dayInfo: DayInfo): MeterConsumption {
-
-        let totalConsumption = 0;
-
-        for (const meterState of meterStates) {
-            const meter = meterState.meter;
-            this.writeState(`meter.${meter.alias}.consumptionTotal`, this.roundConsumption(meterState.consumption));
-            this.writeState(`meter.${meter.alias}.consumptionAverage`, this.roundConsumption(meterState.consumption / dayInfo.daysSinceStartOfYear));
-            this.writeState(`meter.${meter.alias}.consumptionPredictedTotal`, this.roundConsumption(meterState.consumption / dayInfo.daysSinceStartOfYear * dayInfo.daysInYear));
-            totalConsumption += meterState.consumption;
+    private getNumericStateValue(state: null|undefined|ioBroker.State, onErrorMessage: string): number {
+        const stateValue = state?.val;
+        if (typeof stateValue === 'number') {
+            return stateValue;
         }
-
-        return {
-            total: totalConsumption,
-            average: totalConsumption / dayInfo.daysSinceStartOfYear,
-            predicted: totalConsumption / dayInfo.daysSinceStartOfYear * dayInfo.daysInYear,
-        };
-    }
-
-    private calculateCosts(meterStates: MeterState[], dayInfo: DayInfo): number {
-
-        let usedCosts = 0;
-
-        const basePricePerDay = this.config.paymentBasePrice / dayInfo.daysInYear;
-        usedCosts += basePricePerDay * dayInfo.daysSinceStartOfYear;
-
-        for (const meterState of meterStates) {
-            const meter = meterState.meter;
-            this.writeState(`meter.${meter.alias}.costs`, this.roundCosts(meterState.consumption * meterState.meter.pricePerUnit));
-            usedCosts += meterState.consumption * meterState.meter.pricePerUnit;
-        }
-
-        return usedCosts;
-    }
-
-    private calculatePaid(dayInfo: DayInfo): number {
-
-        let paid = this.config.paymentCorrectionOffset;
-
-        const paymentPerDay = this.config.paymentValue * this.config.paymentCount / dayInfo.daysInYear;
-        paid += paymentPerDay * dayInfo.daysSinceStartOfYear;
-
-        return paid;
-    }
-
-    private calculateRecommendation(costs: number, dayInfo: DayInfo): number {
-        return this.roundCosts(costs / dayInfo.daysSinceStartOfYear * dayInfo.daysInYear / this.config.paymentCount);
-    }
-
-
-    public roundCosts(costs: number): number {
-        return Math.round(costs * 100) / 100;
-    }
-
-    public roundConsumption(consumption: number): number {
-        return Math.round(consumption * 1000) / 1000;
-    }
-
-    public getDaysInYear(): number {
-        return 365;
-    }
-
-    public getDaysSince(start: Date): number {
-        const now = new Date();
-        const diff = now.valueOf() - start.valueOf();
-        const oneDay = 1000 * 60 * 60 * 24;
-        return Math.floor(diff / oneDay);
-    }
-
-    private writeState(id: string, value: any): void {
-        this.addPendingPromise(this.setStateAsync(id, {val: value, ack: true}));
+        throw new Error(onErrorMessage);
     }
 
     private async getMeterStates(): Promise<MeterState[]> {
@@ -143,47 +84,59 @@ class MeterStatistics extends utils.Adapter {
         return meterStates;
     }
 
-    private getNumericStateValue(state: null|undefined|ioBroker.State, onErrorMessage: string): number {
-        const stateValue = state?.val;
-        if (typeof stateValue === 'number') {
-            return stateValue;
-        }
-        throw new Error(onErrorMessage);
-    }
-
     private async getMeterState(meter: MeterDefinition): Promise<MeterState> {
 
+        const meterName = meter.alias;
+        const currentValueState = await this.getForeignStateAsync(meter.objectId);
         const currentValue = this.getNumericStateValue(
-            await this.getForeignStateAsync(meter.objectId),
-            `Could not read meter "${meter.alias}" with id: ${meter.objectId}`
-        );
+            currentValueState,
+            `Could not read meter "${meterName}" with id: ${meter.objectId}`
+        ) || 0;
+
+        const startValueState = await this.getStateAsync(`configuration.${meterName}.startValue`);
+        let startValueDateTime: Date|null = null;
+        if (!startValueState) {
+            await this.setStateAsync(`configuration.${meterName}.startValue`, {val: currentValue, ack: true});
+            startValueDateTime = new Date(Round.precise(currentValueState?.ts || Date.now(), -3));
+            await this.setStateAsync(`configuration.${meterName}.readingDateTime`, {val: startValueDateTime.toISOString(), ack: true});
+        }
         const startValue = this.getNumericStateValue(
-            await this.getStateAsync(`meter.${meter.alias}.startValue`),
-            `Could not read start value for meter "${meter.alias}".`
+            startValueState || await this.getStateAsync(`configuration.${meterName}.startValue`),
+            `Could not read start value for meter "${meterName}".`
         );
+        if (!startValueDateTime) {
+            const startValueDateTimeValue = (await this.getStateAsync(`configuration.${meterName}.readingDateTime`))?.val;
+            if (typeof startValueDateTimeValue === 'string') {
+                try {
+                    startValueDateTime = new Date(Date.parse(startValueDateTimeValue));
+                } catch (e) {}
+            }
+        }
 
         return {
             meter,
             currentValue,
             startValue,
+            startValueDateTime,
             consumption: currentValue - startValue,
         };
     }
 
-    private getDayInfo(): DayInfo {
-
-        const firstDayOfYear = new Date((new Date()).getFullYear(), 0, 0);
-        const daysInYear = this.getDaysInYear();
-        const daysSinceStartOfYear = this.getDaysSince(firstDayOfYear);
-
-        return {firstDayOfYear, daysInYear, daysSinceStartOfYear};
-    }
-
-    private async assertObjectsExist(): Promise<void> {
+    private assertObjectsExist(): Promise<any> {
+        const promises = [];
 
         for (const meter of this.config.meters) {
+            promises.push(...this.assertMeterObjectsExist(meter.alias));
+        }
+        promises.push(...this.assertMeterObjectsExist(this.config.summaryName, false));
 
-            await this.setObjectNotExistsAsync(`meter.${meter.alias}.startValue`, {
+        return Promise.allSettled(promises);
+    }
+
+    private assertMeterObjectsExist(meterName: string, hasStartValue = true): ioBroker.SetObjectPromise[] {
+        const promises = [];
+        if (hasStartValue) {
+            promises.push(this.setObjectNotExistsAsync(`configuration.${meterName}.startValue`, {
                 type: 'state',
                 common: {
                     name: 'Start value',
@@ -194,85 +147,21 @@ class MeterStatistics extends utils.Adapter {
                     unit: this.config.meterUnit,
                 },
                 native: {},
-            });
-            await this.setObjectNotExistsAsync(`meter.${meter.alias}.consumptionAverage`, {
+            }));
+            promises.push(this.setObjectNotExistsAsync(`configuration.${meterName}.readingDateTime`, {
                 type: 'state',
                 common: {
-                    name: 'Average consumption in period',
-                    type: 'number',
+                    name: 'Timestamp of reading start value',
+                    desc: 'ONLY INFORMATION: Does not affect any calculation yet.',
+                    type: 'string',
                     role: 'state',
                     read: true,
-                    write: false,
-                    unit: this.config.meterUnit,
+                    write: true,
                 },
                 native: {},
-            });
-            await this.setObjectNotExistsAsync(`meter.${meter.alias}.consumptionTotal`, {
-                type: 'state',
-                common: {
-                    name: 'Total consumption in period',
-                    type: 'number',
-                    role: 'state',
-                    read: true,
-                    write: false,
-                    unit: this.config.meterUnit,
-                },
-                native: {},
-            });
-            await this.setObjectNotExistsAsync(`meter.${meter.alias}.consumptionPredictedTotal`, {
-                type: 'state',
-                common: {
-                    name: 'Total predicted consumption in period',
-                    type: 'number',
-                    role: 'state',
-                    read: true,
-                    write: false,
-                    unit: this.config.meterUnit,
-                },
-                native: {},
-            });
-            await this.setObjectNotExistsAsync(`meter.${meter.alias}.costs`, {
-                type: 'state',
-                common: {
-                    name: 'Total costs',
-                    type: 'number',
-                    role: 'state',
-                    read: true,
-                    write: false,
-                    unit: this.config.paymentUnit,
-                },
-                native: {},
-            });
-
+            }));
         }
-
-        await this.setObjectNotExistsAsync(`summary.consumptionTotal`, {
-            type: 'state',
-            common: {
-                name: 'Total consumption in period',
-                type: 'number',
-                role: 'state',
-                read: true,
-                write: false,
-                unit: this.config.meterUnit,
-            },
-            native: {},
-        });
-
-        await this.setObjectNotExistsAsync(`summary.consumptionPredictedTotal`, {
-            type: 'state',
-            common: {
-                name: 'Total predicted consumption in period',
-                type: 'number',
-                role: 'state',
-                read: true,
-                write: false,
-                unit: this.config.meterUnit,
-            },
-            native: {},
-        });
-
-        await this.setObjectNotExistsAsync(`summary.consumptionAverage`, {
+        promises.push(this.setObjectNotExistsAsync(`meters.${meterName}.consumptionAverage`, {
             type: 'state',
             common: {
                 name: 'Average consumption in period',
@@ -283,22 +172,32 @@ class MeterStatistics extends utils.Adapter {
                 unit: this.config.meterUnit,
             },
             native: {},
-        });
-
-        await this.setObjectNotExistsAsync(`summary.paid`, {
+        }));
+        promises.push(this.setObjectNotExistsAsync(`meters.${meterName}.consumptionTotal`, {
             type: 'state',
             common: {
-                name: 'Total paid value',
+                name: 'Total consumption in period',
                 type: 'number',
                 role: 'state',
                 read: true,
                 write: false,
-                unit: this.config.paymentUnit,
+                unit: this.config.meterUnit,
             },
             native: {},
-        });
-
-        await this.setObjectNotExistsAsync(`summary.costs`, {
+        }));
+        promises.push(this.setObjectNotExistsAsync(`meters.${meterName}.consumptionPredictedTotal`, {
+            type: 'state',
+            common: {
+                name: 'Total predicted consumption in period',
+                type: 'number',
+                role: 'state',
+                read: true,
+                write: false,
+                unit: this.config.meterUnit,
+            },
+            native: {},
+        }));
+        promises.push(this.setObjectNotExistsAsync(`meters.${meterName}.costs`, {
             type: 'state',
             common: {
                 name: 'Total costs',
@@ -309,9 +208,20 @@ class MeterStatistics extends utils.Adapter {
                 unit: this.config.paymentUnit,
             },
             native: {},
-        });
-
-        await this.setObjectNotExistsAsync(`summary.balance`, {
+        }));
+        promises.push(this.setObjectNotExistsAsync(`meters.${meterName}.paid`, {
+            type: 'state',
+            common: {
+                name: 'Total paid value',
+                type: 'number',
+                role: 'state',
+                read: true,
+                write: false,
+                unit: this.config.paymentUnit,
+            },
+            native: {},
+        }));
+        promises.push(this.setObjectNotExistsAsync(`meters.${meterName}.balance`, {
             type: 'state',
             common: {
                 name: 'Current balance',
@@ -322,9 +232,8 @@ class MeterStatistics extends utils.Adapter {
                 unit: this.config.paymentUnit,
             },
             native: {},
-        });
-
-        await this.setObjectNotExistsAsync(`summary.recommendedPayment`, {
+        }));
+        promises.push(this.setObjectNotExistsAsync(`meters.${meterName}.recommendedPayment`, {
             type: 'state',
             common: {
                 name: 'Recommended payment per payment interval',
@@ -335,7 +244,9 @@ class MeterStatistics extends utils.Adapter {
                 unit: this.config.paymentUnit,
             },
             native: {},
-        });
+        }));
+
+        return promises;
     }
 
     end(): void {

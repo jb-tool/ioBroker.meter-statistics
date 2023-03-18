@@ -108,6 +108,10 @@ Please refer to the [`dev-server` documentation](https://github.com/ioBroker/dev
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* [TASK] Code refactoring
+* [TASK] Add test cases
+
 ### 0.0.4 (2023-03-05)
 * [BUGFIX] Fix calculation of predicted total
 * [TASK] Update project

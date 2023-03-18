@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/round.ts"],
+  "sourcesContent": ["class Round {\n\n    public costs(costs: number): number {\n        return this.precise(costs, 2);\n    }\n\n    public consumption(consumption: number): number {\n        return this.precise(consumption, 3);\n    }\n\n    public precise(value: number, scale: number): number {\n        if (null === value) {\n            return value;\n        }\n        const factor = Math.pow(10, scale);\n        return Math.round(value * factor) / factor;\n    }\n\n}\n\nexport default new Round();\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MAAM,MAAM;AAAA,EAED,MAAM,OAAuB;AAChC,WAAO,KAAK,QAAQ,OAAO,CAAC;AAAA,EAChC;AAAA,EAEO,YAAY,aAA6B;AAC5C,WAAO,KAAK,QAAQ,aAAa,CAAC;AAAA,EACtC;AAAA,EAEO,QAAQ,OAAe,OAAuB;AACjD,QAAI,SAAS,OAAO;AAChB,aAAO;AAAA,IACX;AACA,UAAM,SAAS,KAAK,IAAI,IAAI,KAAK;AACjC,WAAO,KAAK,MAAM,QAAQ,MAAM,IAAI;AAAA,EACxC;AAEJ;AAEA,IAAO,gBAAQ,IAAI,MAAM;",
+  "names": []
+}
