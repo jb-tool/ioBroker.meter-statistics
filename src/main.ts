@@ -135,6 +135,16 @@ class MeterStatistics extends utils.Adapter {
 
     private assertMeterObjectsExist(meterName: string, hasStartValue = true): ioBroker.SetObjectPromise[] {
         const promises = [];
+
+        promises.push(this.setObjectNotExistsAsync(`configuration.${meterName}`, {
+            type: 'device',
+            common: {
+                name: `configuration.${meterName}`,
+                icon: `/icons/${hasStartValue ? 'device' : 'summary'}-icon.svg`,
+            },
+            native: {},
+        }));
+
         if (hasStartValue) {
             promises.push(this.setObjectNotExistsAsync(`configuration.${meterName}.startValue`, {
                 type: 'state',
@@ -146,7 +156,8 @@ class MeterStatistics extends utils.Adapter {
                     write: true,
                     unit: this.config.meterUnit,
                 },
-                native: {},
+                native: {
+                },
             }));
             promises.push(this.setObjectNotExistsAsync(`configuration.${meterName}.readingDateTime`, {
                 type: 'state',

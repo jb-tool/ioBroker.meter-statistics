@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" version="1.1" viewBox="0 0 105.83 105.83" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="a" overflow="visible" orient="auto">
+      <path transform="matrix(-.4 0 0 -.4 -4 0)" d="m0 0 5-5-17.5 5 17.5 5z" fill="context-stroke" fill-rule="evenodd" stroke="context-stroke" stroke-width="1pt"/>
+    </marker>
+  </defs>
+  <path x="13.761666" y="0.53250003" width="78.309998" height="104.76833" d="m16.408 0.5325h73.018a2.6458 2.6458 45 0 1 2.6458 2.6458v99.477a2.6458 2.6458 135 0 1-2.6458 2.6458h-73.018a2.6458 2.6458 45 0 1-2.6458-2.6458v-99.477a2.6458 2.6458 135 0 1 2.6458-2.6458z" fill="#ececec" stroke="#b1b1b1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.065"/>
+  <path x="24.344997" y="12.382141" width="57.143333" height="30.68499" d="m26.991 12.382h51.852a2.6458 2.6458 45 0 1 2.6458 2.6458v25.393a2.6458 2.6458 135 0 1-2.6458 2.6458h-51.852a2.6458 2.6458 45 0 1-2.6458-2.6458v-25.393a2.6458 2.6458 135 0 1 2.6458-2.6458z" fill="#fff" stroke="#b1b1b1" stroke-linejoin="round" stroke-width="1.065"/>
+  <text transform="scale(.78891 1.2676)" x="34.916286" y="29.418192" fill="#000000" font-family="sans-serif" font-size="20.281px" letter-spacing="0px" stroke-width=".36216" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="34.916286" y="29.418192" font-family="Ani" font-size="20.281px" stroke-width=".36216">0000.0</tspan></text>
+  <g transform="translate(12.75)">
+    <text transform="scale(.98752 1.0126)" x="63.427376" y="90.78965" fill="#b1b1b1" font-family="sans-serif" font-size="14.551px" letter-spacing="0px" stroke-width=".2021" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="63.427376" y="90.78965" fill="#b1b1b1" font-family="FreeSans" font-size="14.551px" stroke-width=".2021">∑</tspan></text>
+    <text x="8.8679714" y="67.230087" fill="#b1b1b1" font-family="sans-serif" font-size="19.05px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="8.8679714" y="67.230087" fill="#b1b1b1" font-family="FreeSans" font-size="19.05px" stroke-width=".26458">€</tspan></text>
+    <g transform="matrix(1.481 0 0 1.8284 -58.042 -106.23)" fill="none" stroke="#b1b1b1" stroke-linejoin="round" stroke-width=".97896">
+      <path d="m44.823 87.274c-8e-4 7.6096-0.0016 15.219-0.0024 22.828 14.49 1e-3 28.98 3e-3 43.47 4e-3"/>
+      <path d="m44.826 110.1c1.6195-2.6756 5.8661-9.6918 7.357-10.078 1.4909-0.38619 5.0588 4.6054 6.6312 3.8243s6.2522-9.8695 8.0363-10.492c1.784-0.62294 6.4571 5.1992 8.6176 4.9959 2.1605-0.20323 8.8205-7.0914 11.36-9.7182" marker-end="url(#a)"/>
+    </g>
+  </g>
+</svg>

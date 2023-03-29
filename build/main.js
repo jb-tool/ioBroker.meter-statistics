@@ -115,6 +115,14 @@ class MeterStatistics extends utils.Adapter {
   }
   assertMeterObjectsExist(meterName, hasStartValue = true) {
     const promises = [];
+    promises.push(this.setObjectNotExistsAsync(`configuration.${meterName}`, {
+      type: "device",
+      common: {
+        name: `configuration.${meterName}`,
+        icon: `/icons/${hasStartValue ? "device" : "summary"}-icon.svg`
+      },
+      native: {}
+    }));
     if (hasStartValue) {
       promises.push(this.setObjectNotExistsAsync(`configuration.${meterName}.startValue`, {
         type: "state",
