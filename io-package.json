@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "meter-statistics",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "[FEATURE] Add device icons",
+        "de": "(STÖHNT) Gerätesymbole hinzufügen",
+        "ru": "[Фекция] Добавьте иконки устройства",
+        "pt": "[FEATURE] Adicionar ícones do dispositivo",
+        "nl": "[FEATURE] Voeg apparatuur toe",
+        "fr": "[FEATURE] Ajouter les icônes de périphérique",
+        "it": "[FEATURE] Aggiungi icone del dispositivo",
+        "es": "[Feria] Añadir iconos de dispositivo",
+        "pl": "(FEATURE) Addd device ikon",
+        "uk": "[Життя] Додавання іконок пристрою",
+        "zh-cn": "[签字] 添加装置"
+      },
       "0.1.0": {
         "en": "[TASK] Code refactoring\n[TASK] Add test cases",
         "de": "[TASK] Code-Refactoring\n(TASK) Testfälle hinzufügen",
